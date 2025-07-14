@@ -25,12 +25,13 @@ The app serves an interface for recording experiment results via endpoints like 
     MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/dbRabbits
     PORT=3000
 
-    If you want to test with a local MongoDB instance instead, you can omit MONGODB_URI — the app defaults to mongodb://localhost:27017.
+4. If you want to test with a local MongoDB instance instead, you can omit MONGODB_URI — the app defaults to mongodb://localhost:27017.
 
-4. Start the server
+5. Start the server
+    ```bash
     npm start
 
-5. Visit: http://localhost:3000
+6. Visit: http://localhost:3000
 
 ## Project Structure
     ThreeAnimalsV2/
