@@ -10,7 +10,7 @@ The app serves an interface for recording experiment results via endpoints like 
 
 - Node.js (v14 or higher recommended)
 - npm
-- MongoDB Atlas account (or local MongoDB) - you must create a cluster callsed "dbRabbits" and collections named after the animals "otters", "owls" and "chipmunks". Another collection "subjects" is used for collecting subjects info.
+- MongoDB Atlas account (or local MongoDB) - you must create a cluster called "dbRabbits" and collections named after the animals "otters", "owls" and "chipmunks". Another collection "subjects" is used for collecting subjects info.
 
 ## Setup
 
@@ -21,6 +21,7 @@ The app serves an interface for recording experiment results via endpoints like 
    npm install
 
 3. Create a .env file in the root of the project with the following format:
+    ```bash
     MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/dbRabbits
     PORT=3000
 
@@ -56,6 +57,6 @@ The app serves an interface for recording experiment results via endpoints like 
     /update_subject – Update subject’s experiment field
 
 ## Notes
-This project is archived and not actively maintained.
-Some routes may assume specific formats in the front-end form submission — inspect views/ and public/ assets for context.
-body-parser is now part of Express (express.json() and express.urlencoded()), but is still used here for legacy compatibility.
+1. This project is archived and not actively maintained.
+2. Some routes may assume specific formats in the front-end form submission — inspect views/ and public/ assets for context.
+3. body-parser is now part of Express (express.json() and express.urlencoded()), but is still used here for legacy compatibility.
