@@ -10,7 +10,7 @@ The app serves an interface for recording experiment results via endpoints like 
 
 - Node.js (v14 or higher recommended)
 - npm
-- MongoDB Atlas account (or local MongoDB) - you must create a cluster called "dbRabbits" and collections named after the animals "otters", "owls" and "chipmunks". Another collection "subjects" is used for collecting subjects info.
+- MongoDB Atlas account (or local MongoDB) - you must create a cluster called "dbRabbits" and collections named after the animals "otters", "owls" and "chipmunks". Another collection "subjectNumbers" is used for collecting the subject's demographic info.
 
 ## Setup
 
