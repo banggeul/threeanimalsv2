@@ -1,0 +1,21 @@
+{
+  "name": "Three Animals Experiments",
+  "short_name": "ThreeAnimals V.2",
+  "description": "Experiments for Hot Hand Thinking in Children V.3",
+  "version": "0.0.0.1",
+  "manifest_version": 1,
+  "author": "Bang Geul Han",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "theme_color": "#015174",
+  "background_color": "#F7F4F3",
+  "app": {
+    "urls": [
+      
+    ],
+    "permissions": [
+      "fullscreen"
+    ]
+  }
+}

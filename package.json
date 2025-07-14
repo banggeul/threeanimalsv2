@@ -1,0 +1,23 @@
+{
+  "name": "random-animals",
+  "version": "1.0.0",
+  "description": "a suit of three animal games for congnitive psychology experiment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "game",
+    "experiment",
+    "psychology"
+  ],
+  "author": "Bang Geul Han",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongodb": "^4.3.1"
+  }
+}

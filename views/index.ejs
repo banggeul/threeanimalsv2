@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title> <%= title %> </title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <!-- <meta name="viewport" content="width=2732, user-scalable=no"> -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="apple-touch-icon" href="/images/touch-icon-iphone.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon-iphone-retina.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="/images/icon-ipad-retina.png">
+</head>
+
+<body>
+  <div id="app-container">
+    <div id="spinner"></div> 
+    <div class="" id="content"></div>
+    <div class="container" id="interfaceContainer">
+      <h1 id="welcomeMsg">Demographics</h1>
+      <div id="user-context">
+        <!-- hide the langugage choice for now -->
+        <div class="formRowFlex" style="display:none">
+          <label class="radioBtnContainer">English
+            <input type="radio" checked="checked" name="radio" value="en">
+            <span class="checkmark"></span>
+          </label>
+          <label class="radioBtnContainer">Deutsch
+            <input type="radio" name="radio" value="de">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <!-- language choice block end -->
+        <div class="formRow">
+          <h2 id="enterAgeSubjectMsg">Please enter the age and participant number.</h2>
+        </div>
+        <!-- <a class="cta" href="#" id="submitLanguage">Next</a> -->
+        <div class="inputAgeSubjectNum" id="inputAgeSubjectNum">
+
+          <div class="formRow" id="age">
+
+            <div class="ageInputRow">
+              <label for="age" id="ageLabel" class="ageInputCol labelBold">Age:</label>
+              <div class="ageInputCol">
+                <label for="year" id="yearLabel"> Year </label>
+                <select id="ageYearOptions" name="ageYearOptions">
+                  <option disabled selected></option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                </select>
+              </div>
+              <div class="ageInputCol">
+                <label for="month" id="monthLabel"> Months </label>
+                <select id="ageMonthOptions" name="ageMonthOptions">
+                  <option disabled selected value="-1"></option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="formRowFlex flexLeft">
+            <label for="sessionID" id="enterSubjectNumMsg" class="inlineLabel labelBold">Participant Number:</label>
+
+            <!-- <input onClick="this.setSelectionRange(0, this.value.length);" type="text" name="name" id="name" value=""> -->
+            <select id="subjectNumOptions" name="subjectNumOptions" class="dropdownExtend" disabled>
+              <option disabled selected id="selectSubNumMsg">Select the participant number below.</option>
+            </select>
+          </div>
+          <div class="formRowFlex buttons">
+            <a href="#" id="generateNewIDButton" class="cta generateNewIDButton disabled"> Generate New Instead?</a>
+            <a class="cta disabled" href="#" id="checkSubjectID">Check Participant Number</a>
+          </div>
+        </div>
+        <div class="inputGender" id="inputGender">
+          <div class="formRow" id="genderOptionRow" style="margin-bottom: 0;">
+            <label id="subjectInfoLabel">This is a new participant. Please select the gender.</label>
+            <div class="formRowFlex flexLeft">
+              <label for="gender" id="genderLabel" class="inlineLabel labelBold">Gender:</label>
+              <select id="genderOptions" name="genderOptions" class="dropdownExtend">
+                <option disabled selected value=null></option>
+                <option value="female" id="female">Female</option>
+                <option value="male" id="male">Male</option>
+                <option value="nonbinary" id="nonbinary">Prefer not to answer</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- parental consent dropdown -->
+          <div class="formRow" id="parentalConsentOptionRow" style="margin-bottom: 2em;">
+            <div class="formRowFlex flexLeft">
+              <label for="parentalConsent" id="parentalConsentLabel" class="inlineLabel labelBold">Parental Consent Given:</label>
+              <select id="parentalConsentOptions" name="parentalConsentOptions" class="dropdownExtend">
+                <option disabled selected value=null></option>
+                <option value="yes" id="yes">Yes</option>
+                <option value="no" id="no">No</option>
+              </select>
+            </div>
+          </div>
+          <!-- just a simple checkbox -->
+          <!-- <div class="formRowFlex" style="justify-content: flex-end;">
+            <label for="" class="labelBold" style="width: auto; margin-right: 10px;">Parental Consent:</label>
+            <input class="activeCheckbox" style="height: 30px; width: 30px;" type="checkbox" name="parentalConsentCheckbox" id="parentalConsentCheckbox">
+          </div> -->
+          
+          <div class="formRowFlex formRowCenter">
+            <a class="cta" href="#" id="TaskOneButton" name="one">Trial 1</a>
+            <div class="checkbox" id="taskOneCheckbox"></div>
+          </div>
+          <div class="formRowFlex formRowCenter">
+            <a class="cta" href="#" id="TaskTwoButton" name="two">Trial 2</a>
+            <div class="checkbox" id="taskTwoCheckbox"></div>
+          </div>
+          <div class="formRowFlex formRowCenter">
+            <a class="cta" href="#" id="TaskThreeButton" name="three">Trial 3</a>
+            <div class="checkbox" id="taskThreeCheckbox"></div>
+          </div>
+          <div class="formRowFlex">
+            <label id="tryAgain" style="line-height: 1.1;">This participant has finished all trials. <br> Start a new test with the next participant.</label>
+            <a href="#" id="startNewTestBtn" class="cta startNewTestBtn disabled"> New Test</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js"></script>
+  <script>
+    // console.log("<%= myVar %>");
+  </script>
+  <script type="module" src="/javascripts/sketch.js"></script>
+</body>
+
+</html>
