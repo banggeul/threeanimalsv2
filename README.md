@@ -32,14 +32,14 @@ The app serves an interface for recording experiment results via endpoints like 
 5. Visit: http://localhost:3000
 
 ## Project Structure
-ThreeAnimalsV2/
-├── public/              # Static assets (CSS, JS, images)
-├── views/               # EJS templates (index.ejs, task1.ejs, etc.)
-├── server.js            # Main server logic
-├── .env.example         # Example env file (add this manually)
-├── .gitignore
-├── package.json
-└── package-lock.json
+    ThreeAnimalsV2/
+    ├── public/              # Static assets (CSS, JS, images)
+    ├── views/               # EJS templates (index.ejs, task1.ejs, etc.)
+    ├── server.js            # Main server logic
+    ├── .env                 # Example env file (add this manually)
+    ├── .gitignore
+    ├── package.json
+    └── package-lock.json
 
 ## Routes
 ### Frontend Views
