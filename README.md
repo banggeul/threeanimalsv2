@@ -1,6 +1,6 @@
 # Three Animals V.2 - Hot Hand Thinking in Children
 
-This is an archived Node.js + Express web application originally deployed on Heroku. It interfaces with a MongoDB Atlas cluster and provides multiple experiment tasks and logging endpoints.
+This is an archived Node.js + Express web application originally developed for iPad Pro(12inch). It interfaces with a MongoDB Atlas cluster and provides multiple experiment tasks and logging endpoints.
 
 ## Overview
 
@@ -31,7 +31,9 @@ The app serves an interface for recording experiment results via endpoints like 
     ```bash
     npm start
 
-6. Visit: http://localhost:3000
+6. Open in Chrome browser (you must enable tablet/mobile device simulator on Chrome DevTools and choose iPad Pro): 
+    ```bash
+    http://localhost:3000
 
 ## Project Structure
     ThreeAnimalsV2/
