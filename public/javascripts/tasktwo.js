@@ -14,7 +14,6 @@ const {
 //check the timezone
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 //this is for testing purpose only
-// const timezone = "Europe/Berlin"
 
 //create an empty object to store the new experiment data
 let experiment = {};
@@ -58,7 +57,6 @@ var sfx = {
 }
 //first thing first,
 //set up instructions
-// setUpInstruction();
 
 //get the reference to the video
 var video = document.querySelector("video");
@@ -76,11 +74,9 @@ document.body.addEventListener('touchstart', () => {
 $setTimeLimit.addEventListener('click', function() {
   //if the time limit is on
   if (this.checked) {
-    // console.log("time limit is on");
     //then show the time limit set form
     fadeIn($timeLimit);
   } else {
-    // console.log("off");
     //if it's turned off, hide the time limit form
     fadeOut($timeLimit, 0.5, true);
   }
@@ -93,7 +89,6 @@ async function fetchSubject() {
     subjectDatabaseURL = "/subjectsBerlin";
   }
   let response = await fetch(subjectDatabaseURL);
-  // let response = await fetch('/subjects');
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -106,7 +101,6 @@ async function fetchSubjectById(){
     singleSubDatabaseURL = "/single_subjectBerlin/";
   }
   let response = await fetch(singleSubDatabaseURL+id);
-  // let response = await fetch('/single_subject/'+id);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -120,9 +114,7 @@ fetchSubjectById().then((data) => {
     currentSubject = data.experiment;
 
     setUpInstruction();
-    // console.log(currentSubject);
     //bind the click event listener with the submit button
-    //$getUserContext.addEventListener('click', getUserContext);
     //now set up the game
     setTaskSetting();
     setUpGame();
@@ -135,7 +127,6 @@ fetchSubjectById().then((data) => {
         }
       }
       document.querySelector("#startBtn").innerHTML = "Spiel starten"
-      // document.querySelector('#thanks-msg').innerHTML = "Vielen Dank für Ihre Teilnahme"
       document.querySelector('.thanks-img').classList.add('thanks-de');
     }
     showInstruction();
@@ -241,13 +232,9 @@ function setUpInstruction(){
 //when the submit button is clicked do this
 function getUserContext() {
     //get all the values from the input elements
-    // const userID = document.querySelector('#name').value;
     const clickLimit = document.querySelector('#clickLimit').value;
     const timeLimitOn = document.querySelector('#timeLimitSwitch').checked;
     const timeLimit = timeLimitOn ? document.querySelector('#timeLimit').value : -1;
-    // const ageYear = document.querySelector('#ageYear').value;
-    // const ageMonth = document.querySelector('#ageMonth').value;
-    // const gender = document.querySelector('#genderOptions').options[document.getElementById("genderOptions").selectedIndex].value;
 
     //get the current date and time
     const timestamp = Date.now();
@@ -255,10 +242,8 @@ function getUserContext() {
     sessionData.clickLimit = clickLimit;
     sessionData.timeLimit = timeLimit;
     sessionData.timestamp = timestamp;
-    // sessionData.windowSize = {
     //   width: window.innerWidth,
     //   height: window.innerHeight,
-    // };
 
     //make sure the game view is all hidden
     $game.style.display = "none";
@@ -283,7 +268,6 @@ function setUpGame() {
   $game.style.display = "none";
   $game.style.opacity = 0;
 
-  // console.log("set up the game here");
   $game.innerHTML = `<div onclick="void(0);">
       <div id="gameView" class="gameView">
         <div id="clickArea" class="clickArea"></div>
@@ -300,11 +284,9 @@ function setUpGame() {
       </div>
     </div>`;
 
-  // var clickEvent = new MouseEvent("click", {
   //   "view": window,
   //   "bubbles": true,
   //   "cancelable": false
-  // });
 
   let timeID;
   let isGameOn = false;
@@ -313,45 +295,32 @@ function setUpGame() {
   const $gameView = document.querySelector('#gameView');
   const $clickArea = document.querySelector('#clickArea');
 
-  // experiment.clickArea = {width:clickArea, height:clickArea};
   //these two are hidden but left here for added functionality for future
   const $submitButton = document.querySelector('#submit');
   const $playButton = document.querySelector('#playback');
-  // const $appHeader = document.querySelector('#app-header');
   const $gameUI = document.querySelector('#game-ui');
   const $thanks = document.querySelector('.thanks-img');
-  // const $sun = document.querySelector('.sun');
 
   //get the click limit and convert it to a number
   let clickLimit = parseInt(sessionData.clickLimit);
-  //now check if the time limit has been set if so, set the time limit;
   const timeLimit = parseInt(sessionData.timeLimit);
 
 
-  // $appHeader.style.display = "none";
 
   //hide the thank you screen
   $thanks.style.display = "none";
   $thanks.style.opacity = 0;
 
   //make sure the game view is 100% of the screen height
-  // $gameView.style.height = window.innerHeight + "px";
 
   //if startbutton is clicked
   $startBtn.addEventListener('click', function(e) {
     e.preventDefault();
     //play the video
-    // if (video) {
-    //   if (video.paused) {
-    //     video.play();
-    //   }
-    // }
     //fade out the game ui
-    // fadeOut($gameUI, true);
     const timestamp = Date.now();
     sessionData.timestamp = timestamp;
 
-    // $gameUI.style.pointerEvents = "none";
     console.log("start the game!");
     fadeOut($instructionScreen, 2, true);
     $instructionScreen.style.pointerEvents = "none";
@@ -377,8 +346,6 @@ function setUpGame() {
         if (!timeID && timeLimit > 0) {
           //only set up the timer if the time limit has been set
           timeID = setTimeout(function() {
-            //console.log("timeout");
-            // $submitButton.dispatchEvent(clickEvent);
             finishGame();
           }, timeLimit*1000);
         }
@@ -386,10 +353,6 @@ function setUpGame() {
 
   })
 
-  // $gameView.addEventListener('touchstart', () => {});
-  // $gameView.addEventListener('touchend', () => {});
-  // $gameView.addEventListener('touchcancel', () => {});
-  // $gameView.addEventListener('touchmove', () => {});
   //gameview clicks
   $gameView.addEventListener('touchstart', function(e) {
 
@@ -400,18 +363,12 @@ function setUpGame() {
       let x = e.touches[0].clientX;
       let y = e.touches[0].clientY;
       let inOrOut = isInside(x, y,clickAreaRect);
-      // console.log(e.touches[0].clientX, e.touches[0].clientY);
-      // console.log("is it in or out?" + inOrOut);
       if (isGameOn && inOrOut) {
 
         //play sound?
         sfx.drop.play()
 
-        // console.log("clicked!");
-        // console.log("it's in");
-        // if(inOrOut){
         clickLimit--;
-        // }
         let currentTime = new Date().getTime();
         //create a new data of the current dot
         const data = {
@@ -457,7 +414,6 @@ function setUpGame() {
       data
     } = store.getState();
     let arrayData = data[data.length - 1];
-    // console.log(arrayData);
     replay(arrayData, $gameView);
     this.classList.add('disabled');
   })
@@ -470,7 +426,6 @@ function setUpGame() {
       updateDataType = "UPDATE_DATA_BERLIN";
       addDataType = "ADD_DATA_BERLIN";
     }
-    // console.log("clear timeout")
     //make sure we stop the timer if it's been created
     if(timeID)
       clearTimeout(timeID);
@@ -500,15 +455,11 @@ function setUpGame() {
     //empty the dots array
     dots = [];
     console.log("data logged");
-    // fadeIn($thanks,.5);
     fadeInThanks($thanks, 1.5, 1);
 
     setTimeout(function() {
       window.location.href = "/"+"?subject="+currentSubject.subjectNum+"&id="+experiment.id+"&age="+currentSubject.age.year;
     }, 6000);
-    // gsap.from('.sun', {y:200, duration:2.5, ease:"elastic.out(1, 0.3)", delay:1})
-    // gsap.to('.sun',{filter:"blur(0px)", scale:1.2, repeat:-1, yoyo:true, duration:1});
-    // gsap.from($gameUI, {opacity:0, duration:1});
   }
 }
 
@@ -522,7 +473,6 @@ function createDot(options, $gameView, fadeOut = true, remove = true) {
   dot.style.left = options.x + "px";
   dot.style.opacity = 0.6;
   dot.style.transform = "scale(0.6,0.6)"
-  // fadeIn(dot);
   gsap.to(dot, {
     duration: .3,
     ease: "power4.out",
@@ -545,7 +495,6 @@ function createDot(options, $gameView, fadeOut = true, remove = true) {
   }
 
 }
-//some utility functions for fading in and out using Greensock animation library (GSAP)
 function fadeIn(elem, delay, func=null) {
   elem.style.display = "block";
   elem.style.opacity = 0;
@@ -561,7 +510,6 @@ function fadeIn(elem, delay, func=null) {
 
 function fadeInThanks(elem, duration, delay, display = "block") {
   elem.style.display = display;
-  //elem.style.opacity = 0;
   gsap.to(elem, {
     duration: duration,
     ease: "power1.inOut",
@@ -615,7 +563,6 @@ function timeout(ms) {
 //not used right now but left here just in case
 async function replay(data, $gameView) {
   $gameView.style.pointerEvents = "none";
-  // console.log(data);
   let dTime = 0;
   [...$gameView.children].forEach((dot) => {
     dot.style.display = "none";

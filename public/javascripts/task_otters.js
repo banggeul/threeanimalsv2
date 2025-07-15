@@ -2,7 +2,6 @@
 import storeSubject from '/utils/subject_storage.js'
 import store from '/utils/storage_otters.js'
 import {instructions} from '/instructions/task_otter/instructions.js'
-// import {sequenceSets} from '/javascripts/sequenceSets.js'
 var sequenceSets;
 import { 
   sequenceSetRandom,
@@ -23,21 +22,17 @@ import {
 const {
   data
 } = store.getState();
-//check time zone;
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 //this is for testing purpose only
-// const timezone = "Europe/Berlin"
 const $instructionScreen = document.querySelector("#instructionContainer");
 let instructionPages = [];
 let instTexts = [];
 let nextBtns = [];
 const pathToSlides = "/instructions/task_otter/";
 
-// let timeID;
 let isGameOn = false;
 let languageChoice = "en"
 //get the reference to the game view HTML elements
-// const $startBtn = document.querySelector('#startBtn');
 const $gameView = document.querySelector('#gameView');
 //hide the thank you screen
 
@@ -48,9 +43,6 @@ let $choiceCards = document.querySelectorAll('.choice-card');
 const $leftChoice = document.querySelector('#left');
 const $rightChoice = document.querySelector('#right');
 const $bunny = document.querySelector("#bunny");
-// var $animation = document.getElementById("character");
-// var $animContainer = document.getElementById("animContainer");
-// $animation.style.visibility = "hidden";
 let $canvas_carrot = document.querySelector("#canvas-carrot");
 let $canvas_dirt = document.querySelector("#canvas-dirt");
 let context_c = $canvas_carrot.getContext("2d");
@@ -63,28 +55,17 @@ let animationHeight = 218;
 
 const $feedback = document.querySelector('#feedback');
 
-// const $clickArea = document.querySelector('#clickArea');
 
 //these two are hidden but left here for added functionality for future
 const $submitButton = document.querySelector('#submit');
 const $playButton = document.querySelector('#playback');
-// const $appHeader = document.querySelector('#app-header');
-// const $gameUI = document.querySelector('#game-ui');
-// const $instruction = document.querySelector('#instruction');
 const $thanks = document.querySelector('.thanks-img');
 const $endQuestion = document.querySelector('.end-question-container');
 const $clumpyAnswer = document.querySelector('#clumpy-answer');
-// console.log($clumpyAnswer);
 const $dispersedAnswer = document.querySelector('#dispersed-answer');
-// const $thanksMsg = document.querySelector('#thanks-msg');
 const $demo = document.querySelector('.demo');
 const $demoMsg = document.querySelector('#demo-msg');
 // set the language based on the language setting
-// if(currentSubject.lang == "de"){
-//   // $startBtn.innerHTML = "Starte das Spiel.";
-//   $thanksMsg.innerHTML = "Vielen Dank für Ihre Teilnahme.";
-//   // $instruction.innerHTML = 'Wird es eine Karotte geben oder nicht? Du musst raten!';
-// }
 //hide the thank you screen
 $thanks.style.display = "none";
 $thanks.style.opacity = 0;
@@ -92,8 +73,6 @@ $endQuestion.style.display = "none";
 $endQuestion.style.opacity = 0;
 $demo.style.display = "none";
 $demo.style.opacity = 0;
-// $demoMsg.style.display = "none";
-// $demoMsg.style.opacity = 0;
 //set up the end question
 
 const $noAnswer = document.querySelector('#no-answer');
@@ -137,10 +116,6 @@ function enableEndQuestionButtons(){
 let bunnyX = 200;
 let bunnyY = 300;
 
-// console.log("sequenceSets length = "+sequenceSets.length);
-// for(let i=0; i < sequenceSets.length; i++){
-//   console.log(i + ": "+ sequenceSets[i]);
-// }
 
 setUpInstruction(instructions);
 $instructionScreen.addEventListener('touchstart', function(e){
@@ -149,7 +124,6 @@ $instructionScreen.addEventListener('touchstart', function(e){
     console.log("prevent swipe");
    } 
 
-  // console.log(e.touches[0].clientX);
 });
 
 function setUpInstruction(arr){
@@ -221,7 +195,6 @@ function setUpInstruction(arr){
         instructionText.style.textAlign = inst.textAlign;
       }
       instTexts.push(instructionText);
-      // $instruction.innerHTML += `<div class="instruction">${inst.text.en}</div>`;
     }
     //make some buttons
     let nextBtn = document.createElement('div');
@@ -247,7 +220,6 @@ function setUpInstruction(arr){
       //if it's not the last screen button
       if(i < nextBtns.length-1){
         let delay = parseInt(arr[i+1].textDelay);
-        // function fadeInInstruction(elem, duration, delay, func=null)
         fadeInInstruction(instructionPages[i+1], 1, 1, playVideo);
         fadeInInstruction(instTexts[i+1], 1, delay+1);
         fadeInInstruction(nextBtns[i+1], 1, delay+2, enableNextButton);
@@ -274,7 +246,6 @@ function setUpInstruction(arr){
 
         if(instructions[i].imgfadeOut == 1){
           //if image needs to be faded out, then fade out the whole thing
-          // console.log("fade out the whole thing");
           fadeOut(instructionPages[i], true, 0);
         } else {
           //if image needs to stay, then just fade out the text and the button
@@ -304,13 +275,10 @@ function setUpInstruction(arr){
 function showInstruction(){
 
   //show the first slide
-  // instructionPages[0].style.display = "block";
   fadeInInstruction(instTexts[0], 1, 1.5);
   fadeInInstruction(nextBtns[0], 1, 2.5, enableNextButton);
   fadeInInstruction(instructionPages[0], 1, 0);
   fadeInInstruction($instructionScreen, 1, 0);
-  // const instTexts = document.querySelectorAll('.instruction');
-  // const nextBtns = document.querySelectorAll('div.nextBtn');
 }
 
 //create an empty object to store the new experiment data
@@ -321,7 +289,6 @@ let currentSubjectID;
 const totalCards = 41;
 ///////////////////////********************************************** */
 let currentCardNum = 1;
-//let currentCardNum = 0;
 //make array for sequence set
 var environment = [];
 //array to store choices
@@ -340,7 +307,6 @@ let subjects = [];
 let subjectNum;
 let ageGroup;
 
-// let sequenceSets = [];
 let sequenceSetIndex;
 let pValue;
 let demoOrder = 0;
@@ -367,9 +333,6 @@ const $nextArrow = document.querySelector('#nextArrow');
 const $demoMsgLeft = document.querySelector('#demo-left');
 const $demoMsgRight = document.querySelector('#demo-right');
 
-// $nextArrow.addEventListener('click',()=>{
-//   showNextDemo();
-// })
 
 function updateDemoMsg(msg, elem){
   $demoMsg.innerHTML = msg;
@@ -383,7 +346,6 @@ function showNextDemo(lang, choiceMode){
     const thisMsg = demoMsgs[lang][demoOrder+1];
     fadeOutDemo($demo, 0, updateDemoMsg, thisMsg);
     $nextArrow.style.pointerEvents = "none";
-    // $demoMsg.innerHTML = thisMsg;
     demoOrder++;
     if(demoOrder == 1) {
       //second demo msg so show the two buttons
@@ -414,20 +376,12 @@ function showNextDemo(lang, choiceMode){
         fadeOut($demoMsgRight, true, 0)
       }
       fadeOut($nextArrow, true, 0);
-      // $nextArrow.style.display = "none";
     }
   }
   
 }
 
 //generate some fake sequenceSet for testing purpose
-// for(let i=0; i < 50; i++){
-//   let sequence = [];
-//   for(let j=0; j < 41; j++){
-//     sequence.push(Math.random() > 0.5 ? 1 : 0);
-//   }
-//   sequenceSets.push(sequence);
-// }
 
 var sfx = {
   carrot: new Howl({
@@ -472,11 +426,7 @@ async function fetchSubject(){
 }
 
 //fetch the subject from collection by its id
-// getData('/single_subject/'+id)
-//   .then((data) => {
-//     console.log(data);
 //     //let's do something with it.
-//   });
 
 async function fetchSubjectById(){
   let singleSubDatabaseURL = "/single_subject/";
@@ -509,10 +459,8 @@ fetchSubjectById().then((data) => {
         }
       }
       document.querySelector("#startGameBtn").innerHTML = "Spiel starten"
-      // $thanks.classList.remove('thanks-en');
       $thanks.classList.add('thanks-de');
 
-      // document.querySelector('#thanks-msg').innerHTML = "Vielen Dank für Ihre Teilnahme"
       $demoMsg.innerHTML = "Ich zeige dir, wie es geht."
       document.querySelector("#demo-msg-left").innerHTML = "drücke diese Taste."
       document.querySelector('#demo-msg-right').innerHTML = "drücke diese Taste."
@@ -545,16 +493,13 @@ fetchSubjectById().then((data) => {
     document.querySelector('#game-HUD').style.display = "flex";
     document.querySelector('#game-HUD').style.opacity = "1";
 
-    // pValue = sequence[parseInt(sequenceSet) - 1][41];
     pValue = 1;
     // //load the page content
     //now set up the game
     setUpGame();
     //fade in the instruction screen
-    // fadeIn($instruction, 1);
     //Fade in the game screen
     showInstruction();
-    // fadeIn($game, 1);
   }
 }).catch((e) =>
   console.log(e)
@@ -579,24 +524,15 @@ function setUpGame() {
 
   setUpGameBoard();
   setFirstBunny();
-  // showOptions();
   fadeIn($bunny,1, 0.5);
-  // revealFirstCard();
 
   //make sure the game view is 100% of the screen height
-  // $gameView.style.height = window.innerHeight + "px";
 
   //if startbutton is clicked
-  // $startBtn.addEventListener('click', function(e) {
-  //   e.preventDefault();
   //   //fade out the game ui
-  //   fadeOut($gameUI, true);
-  //   $gameUI.style.pointerEvents = "none";
   //   // //make sure the gameHUD is clickable
-  //   // $gameHUD.style.pointerEvents = "auto";
   //   //move the bunny to the next position
 
-  // })
 
 }
 //set up gameboard
@@ -620,14 +556,7 @@ function setUpGameBoard() {
     console.log(env);
 
     //this is the test set up//
-    // if (x > 1000) {
-    //   col = 1;
-    //   row++;
-    // }
     //
-    // x = (cardWidth) * col + 20;
-    // y = row * (cardWidth) + 10;
-    // col++;
     ///////////////////////////
 
     //get the card positions from the json file//
@@ -640,8 +569,6 @@ function setUpGameBoard() {
       y = cardPositions[i].y;
     }
     /******************************************************************************* */
-    //x = cardPositions[i].x;
-    //y = cardPositions[i].y;
 
     let $card = drawBGCard({
       x: x,
@@ -656,7 +583,6 @@ function setUpGameBoard() {
 function setUpBunny() {
   let $current = $cards[currentCardNum];
   let bunnyPosition = $current.getBoundingClientRect();
-  // console.log($current);
   let x = bunnyPosition.x;
   let y = bunnyPosition.y;
   drawBunny({
@@ -669,7 +595,6 @@ function moveUpBunny() {
   let $current = $cards[currentCardNum];
   let nextBunnyPosition = $current.getBoundingClientRect();
   let currentBunnyPosition = $bunny.getBoundingClientRect();
-  // console.log($current);
   let x = nextBunnyPosition.x + nextBunnyPosition.width / 2 - bunnyX;
   let y = nextBunnyPosition.y + nextBunnyPosition.height / 2 - bunnyY*1.6;
   let duration = 1;
@@ -711,12 +636,10 @@ function moveNext() {
   if (currentCardNum == totalCards - 1) {
     moveAnimation();
     lastCard();
-    // finishGame();
   } else {
     //move the animation to the right position
     moveAnimation();
     revealCard();
-    // currentCardNum++;
     moveUpBunny();
   }
 }
@@ -725,21 +648,17 @@ function moveAnimation() {
   let $current;
   $current = $cards[currentCardNum];
   let animPosition = $current.getBoundingClientRect();
-  // console.log($current);
   let x = animPosition.x + animPosition.width / 2;
   let y = animPosition.y + animPosition.height / 2;
 
   $canvas_carrot.style.pointerEvents = "none";
   $canvas_carrot.style.top = y + "px";
   $canvas_carrot.style.left = x + "px";
-  // $canvas_carrot.style.visibility = "hidden";
 
   $canvas_dirt.style.pointerEvents = "none";
   $canvas_dirt.style.top = y + "px";
   $canvas_dirt.style.left = x + "px";
-  // $canvas_dirt.style.visibility = "hidden";
 
-  // $animContainer.style.transform = "translate(-50%, -50%)";
 }
 
 function setFirstBunny() {
@@ -754,7 +673,6 @@ function revealCard() {
   //get the environment
   const env = environment[parseInt(index)];
   const ch = choices[choices.length - 1];
-  // console.log("env: " + env + ", choice: " + ch);
   if (env == ch) {
     $feedback.innerHTML = "Correct!";
     correct = [...correct, 1];
@@ -773,10 +691,7 @@ function revealCard() {
   //set up the animation
   //make sure the animation has a baked in delay at the beginning to
   //account for the button push time.
-  // $cards[currentCardNum].style.visibility = "hidden";
-  // $cards[currentCardNum].setAttribute('data-env', env);
   setTimeout(()=>{
-    // console.log("is this a bad idea?");
     $cards[currentCardNum-1].style.visibility = "hidden";
     $cards[currentCardNum-1].setAttribute('data-env', env);
   },500);
@@ -788,12 +703,8 @@ function revealCard() {
 
 function generateNextOptions() {
   //show the cards
-  // $gameHUD.style.opacity = 1;
   //to do tomorrow!!!!
   //this needs to happen after the cards are completely faded out
-  // let r = Math.random();
-  // let left = r > 0.5 ? 1 : 0;
-  // let right = r > 0.5 ? 0 : 1;
   let left, right;
   if(choiceMode == 0){
     left = 0;
@@ -806,8 +717,6 @@ function generateNextOptions() {
   $rightChoice.setAttribute('data-choice', right);
   $leftChoice.classList.remove('activeChoiceCard');
   $rightChoice.classList.remove('activeChoiceCard');
-  // $leftChoice.classList.remove('disabledChoiceCard');
-  // $rightChoice.classList.remove('disabledChoiceCard');
 
 }
 
@@ -823,14 +732,11 @@ function drawBGCard(options, fadeOut = true, remove = true) {
     card.classList.remove('currentCard');
   }
 
-  // card.innerHTML = options.env;
   card.style.pointerEvents = "none";
   $gameContainer.append(card);
   card.style.top = options.y + "px";
   card.style.left = options.x + "px";
   card.style.transform = "translate(-50%, -50%)";
-  //card.style.opacity = 0.6;
-  // card.style.transform = "scale(0.6,0.6)"
   card.setAttribute('data-index', options.id);
   return card;
 }
@@ -840,8 +746,6 @@ function drawBunny(options) {
   $bunny.style.top = options.y + "px";
   $bunny.style.left = options.x + "px";
   $bunny.style.transform = "translate(-50%, -50%)";
-  // card.style.opacity = 0.6;
-  // card.style.transform = "scale(0.6,0.6)"
 }
 
 $gameView.addEventListener('touchstart', function(e) {
@@ -850,7 +754,6 @@ $gameView.addEventListener('touchstart', function(e) {
     console.log("prevent swipe");
    } 
 
-  // console.log(e.touches[0].clientX);
    // Invoke the appropriate handler depending on the
    // number of touch points.
    switch (e.touches.length) {
@@ -872,44 +775,19 @@ $gameView.addEventListener('touchstart', function(e) {
    console.log("dont do anything");
  }
 //
-// $leftChoice.addEventListener('touchstart', function(e){
-//   e.preventDefault();
-//   this.style.pointerEvents = "none";
-//   $rightChoice.style.pointerEvents = "none";
-//   $gameHUD.style.pointerEvents = "none";
 //
-//   gsap.fromTo(e.target, 0.3, {y:0},{
 //     y:10,
 //     yoyo: true,
 //     repeat:1,
 //     onComplete: fadeOutShowOptions
-//   })
-//   e.target.classList.add("activeChoiceCard");
 //
-// })
 //
-// $leftChoice.addEventListener('touchend', function(e){
-//   if (currentCardNum <= totalCards - 1) {
-//     let choice = e.target.dataset.choice;
-//     choices = [...choices, parseInt(choice)];
-//     moveNext();
-//   }
-// })
 //
-// $rightChoice.addEventListener('touchstart', function(e){
-//   e.preventDefault();
-//   this.style.pointerEvents = "none";
-//   $leftChoice.style.pointerEvents = "none";
-//   $gameHUD.style.pointerEvents = "none";
 //
-//   gsap.fromTo(e.target, 0.3, {y:0},{
 //     y:10,
 //     yoyo: true,
 //     repeat:1,
 //     onComplete: fadeOutShowOptions
-//   })
-//   e.target.classList.add("activeChoiceCard");
-// })
 
 function buttonPressed(id){
   if(id=="left" || id=="right"){
@@ -939,62 +817,23 @@ function buttonPressed(id){
   }
 }
 
-// $rightChoice.addEventListener('touchend', function(e){
-//   if (currentCardNum <= totalCards - 1) {
-//     let choice = e.target.dataset.choice;
-//     choices = [...choices, parseInt(choice)];
-//     moveNext();
-//   }
-// })
 
 // //event listeners
-// $choiceCards.forEach(function(userItem) {
-//   userItem.addEventListener('touchend', function(e) {
-//     e.preventDefault();
-//     $leftChoice.style.pointerEvents = "none";
-//     $rightChoice.style.pointerEvents = "none";
-//     $gameHUD.style.pointerEvents = "none";
-//     // console.log("current card number: " + currentCardNum);
-//     if (currentCardNum <= totalCards - 1) {
-//       let choice = e.target.dataset.choice;
-//       // console.log(e.target.id);
-//       // if(e.target.id == "left"){
 //       //   //change the right
-//       //   $rightChoice.classList.add('disabledChoiceCard');
-//       // } else {
 //       //   //change the left
-//       //   $leftChoice.classList.add('disabledChoiceCard');
-//       // }
-//       // console.log("choice: " + choice);
-//       choices = [...choices, parseInt(choice)];
-//       //choices.push[choice];
-//       console.log("choice has been made: " + choice );
 //       //add the class to the activeChoiceCard
 //       //don't forget to remove this when you generate the card
-//       e.target.classList.add("activeChoiceCard");
 //
-//       moveNext();
 //       //todo///////////////////////////////////
 //       //make the click feedback animation here
-//       gsap.fromTo(e.target, 0.3, {y:0},{
 //         y:10,
 //         yoyo: true,
 //         repeat:1,
 //         onComplete: fadeOutShowOptions
-//       })
 //       //then fade out the buttons
-//       //fadeOut($gameHUD, false, 1);
 //       ////////////////////////////////////////
-//       // showFeedback();
-//     } else {
-//       //finish the game;
-//     }
-//   })
-// });
 
 function fadeInButtons(){
-  // fadeIn($gameHUD, 0.3, 0, "flex");
-  //fadeInGameHUD();
   //put the bunny into the neutral position
   $bunny.classList.remove("bunny-skipRight");
   $bunny.classList.remove("bunny-skipLeft");
@@ -1013,18 +852,11 @@ function fadeInButtons(){
     fadeInGameHUD();
   }
 
-  // if(currentCardNum == 1) {
-  //   $demoMsg.innerHTML = demoMsgs[languageChoice][6];
-  //   fadeIn($demo, 1, 0, "flex")
-  // }
   //draw some border around the card
-  // $cards[currentCardNum - 1].classList.remove('currentCard');
-  // $cards[currentCardNum].classList.add('currentCard');
 }
 
 function fadeInGameHUD(){
   $gameHUD.style.display = "flex";
-  //elem.style.opacity = 0;
   gsap.to($gameHUD, {
     duration: 0.3,
     ease: "power1.inOut",
@@ -1036,7 +868,6 @@ function fadeInGameHUD(){
 
 function fadeInDemoGameHUD(){
   $gameHUD.style.display = "flex";
-  //elem.style.opacity = 0;
   gsap.to($gameHUD, {
     duration: 0.3,
     ease: "power1.inOut",
@@ -1047,9 +878,6 @@ function fadeInDemoGameHUD(){
 }
 
 function showDemoChoiceButtons(){
-  // $gameHUD.style.pointerEvents = "auto";
-  // $leftChoice.style.pointerEvents = "auto";
-  // $rightChoice.style.pointerEvents = "auto";
   $leftChoice.classList.remove('activeChoiceCard');
   $rightChoice.classList.remove('activeChoiceCard');
   $leftChoice.classList.remove('disabledChoiceCard');
@@ -1076,7 +904,6 @@ function enableChoiceButtons(){
 }
 
 function fadeOutButtons(elem){
-  //fadeOut($gameHUD, false);
   if(currentCardNum < totalCards - 1)
   {
     fadeOutShowOptions(elem);
@@ -1139,18 +966,15 @@ let sprite_d = new Image();
 sprite_d.onload = initDirt;
 sprite_d.src = "media_assets/otter/card_anim/fish_no.png";
 
-// window.addEventListener("resize", resizeCarrot);
 
 function initCarrot() {
   tl_c = gsap.timeline({ onUpdate: updateCarrot, onComplete: carrotFinished, paused:true })
     .to(carrot, { frame: fish_frames.length - 1, roundProps: "frame", repeat: 0, ease: SteppedEase.config(fish_frames.length - 1), duration: 1, delay:0.5 }, 0);
-  // tl_c.pause();
 }
 
 function initDirt() {
   tl_d = gsap.timeline({ onUpdate: updateDirt, onComplete: dirtFinished, paused:true })
       .to(dirt, { frame: no_fish_frames.length - 1, roundProps: "frame", repeat: 0, ease: "none", duration: 1, delay:0.5 }, 0);
-  // tl_d.pause();
 }
 
 function updateCarrot() {
@@ -1159,12 +983,10 @@ function updateCarrot() {
 
   let f = frame.frame;
   let s = frame.spriteSourceSize;
-  // let r = frame.rotated;
 
   let x = carrot.x + s.x;
   let y = carrot.y + s.y;
 
-  // console.log(f);
 
   context_c.save();
   context_c.clearRect(0, 0, vw, vh);
@@ -1179,12 +1001,10 @@ function updateDirt() {
 
   let f = frame.frame;
   let s = frame.spriteSourceSize;
-  // let r = frame.rotated;
 
   let x = dirt.x + s.x;
   let y = dirt.y + s.y;
 
-  // console.log(f);
 
   context_d.save();
   context_d.clearRect(0, 0, vw, vh);
@@ -1199,7 +1019,6 @@ function carrotFinished(){
   const index = $cards[currentCardNum-1].dataset.index;
   // //get the environment
   const env = environment[parseInt(index)];
-  // $canvas_carrot.style.visibility = "hidden";
   $canvas_carrot.style.opacity = "0";
 
   if(currentCardNum == 0) {
@@ -1217,7 +1036,6 @@ function dirtFinished(){
   const index = $cards[currentCardNum-1].dataset.index;
   // //get the environment
   const env = environment[parseInt(index)];
-  // $canvas_dirt.style.visibility = "hidden";
   $canvas_dirt.style.opacity = "0";
 
   if(currentCardNum == 0) {
@@ -1242,7 +1060,6 @@ function resize(canvas) {
   canvas.style.height = vh + "px";
 
   canvas.getContext("2d").scale(resolution, resolution);
-  // console.log(resolution)
 }
 
 function playAnimation(mode) {
@@ -1255,9 +1072,7 @@ function playAnimation(mode) {
       delay: 0
     });
     tl_c.restart();
-    // canvas_carrot.style.display = "block";
     //play sound - carrot
-    // sfx.carrot.play();
 
   } else {
     $canvas_dirt.style.visibility = "visible";
@@ -1268,9 +1083,7 @@ function playAnimation(mode) {
       delay: 0
     });
     tl_d.restart();
-    // canvas_dirt.style.display = "block";
     //play sound - dirt
-    // sfx.dirt.play();
   }
 }
 
@@ -1284,15 +1097,12 @@ function showAnimation(){
 
 function lastCard(){
   //make sure we stop the timer if it's been created
-  // if (timeID)
-  //   clearTimeout(timeID);
   isGameOn = false;
   currentCardNum++;
   const index = $cards[currentCardNum - 1].dataset.index;
   //get the environment
   const env = environment[parseInt(index)];
   const ch = choices[choices.length - 1];
-  // console.log("env: " + env + ", choice: " + ch);
   if (env == ch) {
     $feedback.innerHTML = "Correct!";
     correct = [...correct, 1];
@@ -1310,10 +1120,8 @@ function lastCard(){
 
   $cards[totalCards-1].setAttribute('data-env', env);
   //hide the last card
-  // setTimeout(()=>{
   $cards[totalCards-1].style.visibility = "hidden";
   console.log("hide the last card");
-  // },500);
   //flip animation goes here
   if(currentCardNum > 1 ) {
     playAnimation(env);
@@ -1355,7 +1163,6 @@ function finishGame(lastAnswer) {
     "lastQuestion": lastAnswer
   }
   //log the data
-  // console.log(sessionData.length);
   //put the dots to the experiment object
   //then store it to the storage which will post it to the database
   store.dispatch({
@@ -1380,15 +1187,10 @@ function finishGame(lastAnswer) {
   setTimeout(function() {
     window.location.href = "/"+"?subject="+currentSubject.subjectNum+"&id="+experiment.id+"&age="+currentSubject.age.year;
   }, 5000);
-  // gsap.from('.sun', {y:200, duration:2.5, ease:"elastic.out(1, 0.3)", delay:1})
-  // gsap.to('.sun',{filter:"blur(0px)", scale:1.2, repeat:-1, yoyo:true, duration:1});
-  // gsap.from($gameUI, {opacity:0, duration:1});
 }
 ////////////
-//some utility functions for fading in and out using Greensock animation library (GSAP)
 function fadeIn(elem, duration, delay, display = "block") {
   elem.style.display = display;
-  //elem.style.opacity = 0;
   gsap.to(elem, {
     duration: duration,
     ease: "power1.inOut",
@@ -1401,7 +1203,6 @@ function fadeIn(elem, duration, delay, display = "block") {
 
 function fadeInEndQuestion(elem, duration, delay, display = "block") {
   elem.style.display = display;
-  //elem.style.opacity = 0;
   gsap.to(elem, {
     duration: duration,
     ease: "power1.inOut",
@@ -1414,7 +1215,6 @@ function fadeInEndQuestion(elem, duration, delay, display = "block") {
 
 function fadeInThanks(elem, duration, delay, display = "block") {
   elem.style.display = display;
-  //elem.style.opacity = 0;
   gsap.to(elem, {
     duration: duration,
     ease: "power1.inOut",
@@ -1426,7 +1226,6 @@ function fadeInThanks(elem, duration, delay, display = "block") {
 
 function fadeInInstruction(elem, duration, delay, func=null){
   elem.style.display = "block";
-  //elem.style.opacity = 0;
   gsap.to(elem, {
     duration: duration,
     ease: "power1.inOut",

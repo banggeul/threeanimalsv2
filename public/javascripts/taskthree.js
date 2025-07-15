@@ -17,7 +17,6 @@ const {
 //check the timezone
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 //this is for testing purpose only
-// const timezone = "Europe/Berlin"
 //create an empty object to store the new experiment data
 let experiment = {};
 let sessionData = {};
@@ -50,8 +49,6 @@ document.querySelector('.thanks-img').style.opacity = 0;
 
 //first thing first,
 //set up instructions
-// setUpInstruction(apple_instructions);
-// setUpInstruction(bird_instructions);
 
 function showInstruction() {
 
@@ -82,8 +79,6 @@ function showInstruction() {
   }
 
   fadeIn($instructionScreen, 0, null);
-  // const instTexts = document.querySelectorAll('.instruction');
-  // const nextBtns = document.querySelectorAll('div.nextBtn');
 
 }
 
@@ -91,17 +86,6 @@ function enableNextButton(elem) {
   elem.style.pointerEvents = "auto";
 }
 
-// function showInstruction() {
-//   if (gameOrder[gameIndex] == "apple") {
-//     $instructionMsg.innerHTML = "This is the instruction for the apple game";
-//   } else {
-//     $instructionMsg.innerHTML = "This is the instruction for the birds game";
-//   }
-//   // const instruction = select('#instruction');
-//   // if(instruction.hasClass('hidden'))
-//   //   instruction.removeClass('hidden');
-//   document.querySelector('#instruction').style.display = "flex";
-// }
 
 function setUpInstruction(arr) {
   let instructionPages = [];
@@ -112,7 +96,6 @@ function setUpInstruction(arr) {
     const inst = arr[i];
     let $instruction = document.createElement("div");
     $instruction.classList.add('instructionWrapper');
-    // $instructionScreen.appendChild($instruction)
     if (inst.background != null && inst.isVideo != 1) {
       $instruction.innerHTML += `<img src=${pathToSlides+inst.background}>`;
     }
@@ -139,12 +122,10 @@ function setUpInstruction(arr) {
 
 
       instTexts.push(instructionText);
-      // $instruction.innerHTML += `<div class="instruction">${inst.text.en}</div>`;
     }
     //not the last screen, so put the next button
     let nextBtn = document.createElement('div');
     if (i < arr.length - 1) {
-      // $instruction.innerHTML += `<div class="nextBtn"></div>`;
       nextBtn.classList.add('nextBtn');
     } else {
       //it's the last screen - put startGameButton
@@ -159,8 +140,6 @@ function setUpInstruction(arr) {
     nextBtns.push(nextBtn);
     instructionPages.push($instruction);
   }
-  // const nextBtns = document.querySelectorAll('div.nextBtn');
-  // const instTexts = document.querySelectorAll('div.instruction');
   //now set up buttons
   for (let i = 0; i < nextBtns.length; i++) {
     nextBtns[i].addEventListener('click', function() {
@@ -204,7 +183,6 @@ async function fetchSubject() {
     console.log("connect to "+subjectDatabaseURL);
   }
   let response = await fetch(subjectDatabaseURL);
-  // let response = await fetch('/subjects');
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -217,7 +195,6 @@ async function fetchSubjectById() {
     singleSubDatabaseURL = "/single_subjectBerlin/";
   }
   let response = await fetch(singleSubDatabaseURL+id);
-  // let response = await fetch('/single_subject/' + id);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -248,13 +225,8 @@ fetchSubjectById().then((data) => {
         }
       }
 
-      // // document.querySelector('#startGameBtn').innerHTML = "Spiel starten"
-      // if(document.querySelector('#startGameBtn')!= null){
-      //   document.querySelector('#startGameBtn').innerHTML = "Spiel starten"
-      // }
       document.querySelector('#ruFinishedBtn').innerHTML = "Spiel beenden"
       document.querySelector('.thanks-img').classList.add('thanks-de');
-      // document.querySelector('#thanks-msg').innerHTML = "Vielen Dank für Ihre Teilnahme"
     }
     //set the game order based on the subjecNum
 // subject 1. apple first, birds second. sun left, cloud left.
@@ -283,7 +255,6 @@ fetchSubjectById().then((data) => {
       gameOrder = ["cloudRight", "sunRight"];
     } 
     //but for now just set it as the first one
-    // document.querySelector('#startBtn').addEventListener('touchstart', startTask);
     //show instruction
     showInstruction();
   })
@@ -295,16 +266,9 @@ function startTask() {
   gameOn = true;
   fadeIn(document.querySelector('canvas'));
   fadeOut(document.querySelector('#instructionContainer'));
-  // document.querySelector('canvas').style.display = "block";
-  // document.querySelector('#instructionContainer').style.display = "none";
   //decide which game to present
   gameMode = gameOrder[gameIndex];
   initGame(gameMode);
-  // if (gameMode == 'birds') {
-  //   initGame('birds');
-  // } else {
-  //   initGame('sunLeft');
-  // }
 }
 
 
@@ -318,7 +282,6 @@ let myObjects = [];
 let apples = [];
 let birds = [];
 let overMyObject = [];
-// let locked = [];
 let xOffset = [];
 let yOffset = [];
 
@@ -367,13 +330,9 @@ let myCanvas;
 
 let gameMode = "menu";
 let instructionDiv;
-// let instructionMsg;
 let startBtn;
 
 window.preload = function() {
-  // preload() runs once
-  // apple = loadImage("/images/apples/apple.png");
-  // apple_shadow = loadImage("/images/apples/apple_shadow.png");
   apple = loadImage("/images/apples/apple_small.png");
   apple_shadow = loadImage("/images/apples/apple_small_shadowRotated.png");
 
@@ -396,8 +355,6 @@ window.setup = function() {
   myObjectSize = windowWidth / myObjectNum;
   textSize(myObjectSize / 3);
   //make an instruction screen
-  // instructionDiv = select('#instruction');
-  // instructionMsg = select('#instructionMsg');
   ruFinishedBtn = select("#ruFinishedBtn");
   ruFinishedBtn.addClass('hidden');
 }
@@ -472,11 +429,7 @@ function bigReset(mode) {
     myObjects[i] = {};
     myObjects[i].x = i * myObjectSize;
     myObjects[i].y = windowHeight - myObjectSize;
-    // myObjects[i].y = windowHeight - myObjectSize * 1.3;
 
-    // myObjectX[i] = i * myObjectSize;
-    // myObjectY[i] = windowHeight - myObjectSize * 1.3;
-    //console.log(gameMode + i + ": " + myObjects[i].x + ", " + myObjects[i].y);
 
     overMyObject[i] = false;
     xOffset[i] = 0.0;
@@ -501,23 +454,18 @@ function drawObjects() {
   for (let i = 0; i < myObjectNum; i++) {
     if (noMoreMove[i]) {
       image(object, myObjects[i].x, myObjects[i].y, myObjectSize, myObjectSize);
-      // image(object, myObjectX[i], myObjectY[i], myObjectSize, myObjectSize);
     } else {
       image(object_shadow, myObjects[i].x, myObjects[i].y, myObjectSize, myObjectSize);
-      // image(object_shadow, myObjectX[i], myObjectY[i], myObjectSize, myObjectSize);
     }
     noFill();
-    //rect(myObjectX[i], myObjectY[i], myObjectSize, myObjectSize);
 
     if (showOrderNumbers) {
       textSize(myObjectSize / 1.4);
       fill(0);
-      // text(myOrder[i], myObjectX[i] + 2 + myObjectSize * .35, myObjectY[i] + 3 + myObjectSize * .8);
       text(myOrder[i], myObjects[i].x + 2 + myObjectSize * .35, myObjects[i].y + 3 + myObjectSize * .8);
       textSize(myObjectSize / 1.45);
       fill(220, 220, 255);
       text(myOrder[i], myObjects[i].x + myObjectSize * .35, myObjects[i].y + myObjectSize * .8);
-      // text(myOrder[i], myObjectX[i] + myObjectSize * .35, myObjectY[i] + myObjectSize * .8);
     }
 
     if (showThanks) {
@@ -556,7 +504,6 @@ function checkOnTree() {
   if (!gameOn)
     return;
   for (let i = 0; i < myObjectNum; i++) {
-    // if (myObjectY[i] < height * 0.57) {
     if (myObjects[i].y < height * 0.57) {
       onTree[i] = true;
     } else {
@@ -570,16 +517,6 @@ function checkTouchOver() {
     return;
 
   for (let i = 0; i < myObjectNum; i++) {
-    // if (
-    //   mouseX > myObjectX[i] &&
-    //   mouseX < myObjectX[i] + myObjectSize &&
-    //   mouseY > myObjectY[i] &&
-    //   mouseY < myObjectY[i] + myObjectSize
-    // ) {
-    //   overMyObject[i] = true;
-    // } else {
-    //   overMyObject[i] = false;
-    // }
     if (
       mouseX > myObjects[i].x &&
       mouseX < myObjects[i].x + myObjectSize &&
@@ -600,11 +537,6 @@ window.touchStarted = function() {
   if (myObjects.length < 1 || !gameOn)
     return;
 
-  // for (let i = 0; i < myObjectNum; i++) {
-  //   if (overMyObject[i]) {
-  //     // console.log("hey it's over apple :" + i);
-  //   }
-  // }
 
   for (let i = 0; i < myObjectNum; i++) {
     if (overMyObject[i] && !noMoreMove[i]) {
@@ -625,30 +557,18 @@ window.touchStarted = function() {
     yOffset[i] = mouseY - myObjects[i].y;
   }
 
-  // console.log("order counter: " + orderCounter);
 
   if (orderCounter == myObjectNum && mouseX > 0 && mouseX < 100 && mouseY > 0 && mouseY < 100) {
     showOrderNumbers = !showOrderNumbers;
-    // // for (let i = 0; i < myObjectNum; i++) {
-    // //   hasMoved[j] = false;
-    // //   noMoreMove[i] = false;
-    // // }
     //
     // //game is all finished
     // //record the end time
     // //check if the end time has already been set
-    // if (myTime.endTime == 0) {
-    //   myTime.endTime = millis();
-    //   console.log("end time: "+myTime.endTime);
-    //   timeTaken = (myTime.endTime - myTime.startTime) * .001;
-    // }
   }
 
 
   if (showOrderNumbers && mouseX < width && mouseX > width - myObjectSize && mouseY < height && mouseY > height - myObjectSize) {
     saveCanvas(myCanvas, dateAndTimeStarted + ".jpg");
-    // bigReset();
-    // setUpStartMenu();
   }
 
   //check if the game is finished
@@ -669,7 +589,6 @@ window.touchStarted = function() {
 function ruFinished() {
   console.log("show r u finished button")
   fadeIn(document.querySelector("#ruFinishedBtn"), 0, enableNextButton);
-  // btn_sunLeft.position(width*.3, height*.2);
   ruFinishedBtn.touchEnded(() => {
     console.log("button clicked");
     ruFinishedBtn.hide();
@@ -684,7 +603,6 @@ function ruFinished() {
     //calculate the time
     if (myTime.endTime == 0) {
       myTime.endTime = millis();
-      // console.log("end time: "+myTime.endTime);
       timeTaken = (myTime.endTime - myTime.startTime) * .001;
     }
     if (gameIndex > 0) {
@@ -766,7 +684,6 @@ function ruFinished() {
       showInstruction();
     }
     //hide the button
-    // fadeOut(document.querySelector("#ruFinishedBtn"),0.5, true);
   });
 }
 
@@ -780,7 +697,6 @@ function finishGame() {
       addDataType = "ADD_DATA_BERLIN";
   }
   const thanks = document.querySelector(".thanks-img");
-  // thanks.removeClass("hidden");
   fadeInThanks(thanks, 1, 1);
   //turn off the game
   gameOn = false;
@@ -822,10 +738,8 @@ window.touchMoved = function() {
       //check the boundary
     const boundary = {left:-31, right: 1255, top: -25, bottom: 888};
     if(myObjects[i].x < boundary.left){
-      // console.log('hello too left');
       myObjects[i].x = boundary.left;
     } else if(myObjects[i].x > boundary.right){
-      // console.log('hello too right');
       myObjects[i].x = boundary.right;
     }
 
@@ -848,10 +762,8 @@ window.touchEnded = function() {
     //check the boundary
     const boundary = {left:-31, right: 1255, top: -25, bottom: 888};
     if(myObjects[i].x < boundary.left){
-      // console.log('hello too left');
       myObjects[i].x = boundary.left;
     } else if(myObjects[i].x > boundary.right){
-      // console.log('hello too right');
       myObjects[i].x = boundary.right;
     }
 
@@ -860,21 +772,15 @@ window.touchEnded = function() {
     } else if(myObjects[i].y > boundary.bottom){
       myObjects[i].y = boundary.bottom;
     }
-    //   myObjects[i].x == myObjectSize/2 - xOffset[i];
-    // } else if(mouseX > width - myObjectSize/2){
-    //   myObjects[i].x == width - myObjectSize/2 - xOffset[i];
-    // }
     if (isMoving[i]) {
       isMoving[i] = false;
       hasMoved[i] = true;
     }
   }
   console.log("touch ended");
-  // return false;
 }
 
 window.mouseClicked = function() {
-  // console.log("mouse clicked");
   return false;
 }
 
@@ -894,7 +800,6 @@ function fadeIn(elem, delay, func = null) {
 
 function fadeInThanks(elem, duration, delay, display = "block") {
   elem.style.display = display;
-  //elem.style.opacity = 0;
   gsap.to(elem, {
     duration: duration,
     ease: "power1.inOut",

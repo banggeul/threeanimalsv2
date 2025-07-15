@@ -310,8 +310,6 @@
       self.autoUnlock = false;
 
       // Some mobile devices/platforms have distortion issues when opening/closing tabs and/or web views.
-      // Bugs in the browser (especially Mobile Safari) can cause the sampleRate to change from 44100 to 48000.
-      // By calling Howler.unload(), we create a new AudioContext with the correct sampleRate.
       if (!self._mobileUnloaded && self.ctx.sampleRate !== 44100) {
         self._mobileUnloaded = true;
         self.unload();
@@ -380,7 +378,6 @@
           source.start(0);
         }
 
-        // Calling resume() on a stack initiated by user gesture is what actually unlocks the audio on Android Chrome >= 55.
         if (typeof self.ctx.resume === 'function') {
           self.ctx.resume();
         }
@@ -750,7 +747,6 @@
         // If the passed sprite doesn't exist, do nothing.
         return null;
       } else if (typeof sprite === 'undefined') {
-        // Use the default sound sprite (plays the full audio length).
         sprite = '__default';
 
         // Check if there is a single paused sound that isn't ended.
@@ -908,7 +904,6 @@
 
             // Support older browsers that don't support promises, and thus don't have this issue.
             if (play && typeof Promise !== 'undefined' && (play instanceof Promise || typeof play.then === 'function')) {
-              // Implements a lock to prevent DOMException: The play() request was interrupted by a call to pause().
               self._playLock = true;
 
               // Set param values immediately.
@@ -1009,7 +1004,6 @@
     pause: function(id) {
       var self = this;
 
-      // If the sound hasn't loaded or a play() promise is pending, add it to the load queue to pause when capable.
       if (self._state !== 'loaded' || self._playLock) {
         self._queue.push({
           event: 'pause',
@@ -1323,7 +1317,6 @@
 
         // Create a linear fade or fall back to timeouts with HTML5 Audio.
         if (sound) {
-          // Stop the previous fade if no sprite is being used (otherwise, volume handles this).
           if (!id) {
             self._stopFade(ids[i]);
           }
@@ -1663,7 +1656,6 @@
             self._emit('seek', id);
           };
 
-          // Wait for the play lock to be unset before emitting (HTML5 Audio).
           if (playing && !self._webAudio) {
             var emitSeek = function() {
               if (!self._playLock) {
@@ -1698,7 +1690,6 @@
     playing: function(id) {
       var self = this;
 
-      // Check the passed sound ID (if any).
       if (typeof id === 'number') {
         var sound = self._soundById(id);
         return sound ? !sound._paused : false;
@@ -1757,7 +1748,6 @@
 
         // Remove the source or disconnect.
         if (!self._webAudio) {
-          // Set the source to 0-second silence to stop any downloading (except in IE).
           self._clearSound(sounds[i]._node);
 
           // Remove any event listeners.
@@ -1782,7 +1772,6 @@
         Howler._howls.splice(index, 1);
       }
 
-      // Delete this sound from the cache (if no other Howl is using it).
       var remCache = true;
       for (i=0; i<Howler._howls.length; i++) {
         if (Howler._howls[i]._src === self._src || self._src.indexOf(Howler._howls[i]._src) >= 0) {
@@ -2243,7 +2232,6 @@
       var volume = (Howler._muted || self._muted || self._parent._muted) ? 0 : self._volume;
 
       if (parent._webAudio) {
-        // Create the gain node for controlling volume (the source will connect to this).
         self._node = (typeof Howler.ctx.createGain === 'undefined') ? Howler.ctx.createGainNode() : Howler.ctx.createGain();
         self._node.gain.setValueAtTime(volume, Howler.ctx.currentTime);
         self._node.paused = true;
@@ -2252,7 +2240,6 @@
         // Get an unlocked Audio object from the pool.
         self._node = Howler._obtainHtml5Audio();
 
-        // Listen for errors (http://dev.w3.org/html5/spec-author-view/spec.html#mediaerror).
         self._errorFn = self._errorListener.bind(self);
         self._node.addEventListener('error', self._errorFn, false);
 
@@ -2529,7 +2516,6 @@
       Howler.usingWebAudio = false;
     }
 
-    // Check if a webview is being used on iOS8 or earlier (rather than the browser).
     // If it is, disable Web Audio as it causes crashing.
     var iOS = (/iP(hone|od|ad)/.test(Howler._navigator && Howler._navigator.platform));
     var appVersion = Howler._navigator && Howler._navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/);
@@ -2541,7 +2527,6 @@
       }
     }
 
-    // Create and expose the master GainNode when using Web Audio (useful for plugins or advanced usage).
     if (Howler.usingWebAudio) {
       Howler.masterGain = (typeof Howler.ctx.createGain === 'undefined') ? Howler.ctx.createGainNode() : Howler.ctx.createGain();
       Howler.masterGain.gain.setValueAtTime(Howler._muted ? 0 : Howler._volume, Howler.ctx.currentTime);
@@ -2552,7 +2537,6 @@
     Howler._setup();
   };
 
-  // Add support for AMD (Asynchronous Module Definition) libraries such as require.js.
   if (typeof define === 'function' && define.amd) {
     define([], function() {
       return {
@@ -2568,7 +2552,6 @@
     exports.Howl = Howl;
   }
 
-  // Add to global in Node.js (for testing, etc).
   if (typeof global !== 'undefined') {
     global.HowlerGlobal = HowlerGlobal;
     global.Howler = Howler;
